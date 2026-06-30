@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:authdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+  kafka:
+    bootstrap-servers: localhost:19092
+
+security:
+  jwt:
+    issuer: test-auth
+    secret: test-secret-test-secret-test-secret-32bytes
+    access-token-ttl-minutes: 15
+    refresh-token-ttl-days: 30
+
+logging:
+  level:
+    root: warn
+    com.inridemart.auth: info

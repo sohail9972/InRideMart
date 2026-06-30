@@ -1,0 +1,13 @@
+target/
+**/target/
+node_modules/
+.next/
+dist/
+build/
+.gradle/
+.idea/
+.vscode/
+*.log
+.env
+.env.*
+!.env.example

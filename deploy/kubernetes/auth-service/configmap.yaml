@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: inridemart
+data:
+  SPRING_PROFILES_ACTIVE: prod
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres.inridemart.svc.cluster.local:5432/inridemart_auth
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka.inridemart.svc.cluster.local:9092
+  SPRING_DATA_REDIS_HOST: redis.inridemart.svc.cluster.local
+
