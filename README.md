@@ -26,12 +26,112 @@ This repository is organized as a modular monorepo. The first production-ready s
 
 ## Quick Start
 
-```bash
-docker compose up -d postgres redis kafka zookeeper
+The project currently has one implemented application service: `auth-service`.
+The remaining modules are planned and documented, but are not runnable services yet.
+
+### Prerequisites
+
+- Java 21 or later
+- Maven
+- Docker Desktop
+- Docker Compose
+
+Verify the tools from PowerShell:
+
+```powershell
+java -version
+mvn -version
+docker --version
+docker compose version
+```
+
+If Docker Desktop is installed but PowerShell cannot find `docker`, temporarily add Docker to the current terminal PATH:
+
+```powershell
+$env:Path += ";C:\Program Files\Docker\Docker\resources\bin"
+```
+
+For a permanent fix, add this folder to the Windows Environment Variables PATH:
+
+```text
+C:\Program Files\Docker\Docker\resources\bin
+```
+
+### 1. Start Infrastructure Services
+
+From the project root:
+
+```powershell
+cd D:\InRideMart
+docker compose up -d
+```
+
+This starts:
+
+- PostgreSQL on `5432`
+- Redis on `6379`
+- Kafka on `9092`
+
+Check that the containers are running:
+
+```powershell
+docker ps
+```
+
+### 2. Run Auth Service
+
+Run the Spring Boot service from the project root:
+
+```powershell
+cd D:\InRideMart
 mvn -pl services/auth-service spring-boot:run
 ```
 
-Swagger UI: `http://localhost:8081/swagger-ui.html`
+Or run it from the service folder:
+
+```powershell
+cd D:\InRideMart\services\auth-service
+mvn spring-boot:run
+```
+
+The application starts on:
+
+```text
+http://localhost:8081
+```
+
+### 3. Verify the Application
+
+Health check:
+
+```text
+http://localhost:8081/actuator/health
+```
+
+Swagger UI:
+
+```text
+http://localhost:8081/swagger-ui.html
+```
+
+or:
+
+```text
+http://localhost:8081/swagger-ui/index.html
+```
+
+### 4. Stop Services
+
+Stop the Spring Boot service with `Ctrl + C` in the terminal where it is running.
+
+Stop Docker infrastructure:
+
+```powershell
+cd D:\InRideMart
+docker compose down
+```
+
+Note: run the Spring Boot service with Maven on your machine for local development. The current `application.yml` points to `localhost` for PostgreSQL, Redis, and Kafka, which matches the ports exposed by `docker-compose.yml`.
 
 ## Architecture
 
@@ -571,3 +671,43 @@ http://localhost:8081/swagger-ui/index.html
 - Config Server
 - Discovery Server
 - Monitoring Stack
+
+
+
+<!-- But Docker is currently not available in your PowerShell PATH:
+docker : The term 'docker' is not recognized
+You need Docker Desktop installed/running, then either restart PowerShell or temporarily add Docker to PATH:
+$env:Path += ";C:\Program Files\Docker\Docker\resources\bin"
+Then verify:
+docker --version
+docker compose version
+Run Infrastructure Services
+From project root:
+cd D:\InRideMart
+docker compose up -d
+This starts:
+PostgreSQL on 5432
+Redis on 6379
+Kafka on 9092
+Check containers:
+docker ps
+Run Auth Service
+Option 1, from root:
+cd D:\InRideMart
+mvn -pl services/auth-service spring-boot:run
+Option 2, from service folder:
+cd D:\InRideMart\services\auth-service
+mvn spring-boot:run
+The auth service runs on:
+http://localhost:8081
+Verify It Is Running
+Health check:
+http://localhost:8081/actuator/health
+Swagger UI:
+http://localhost:8081/swagger-ui.html
+or:
+http://localhost:8081/swagger-ui/index.html
+Stop Services
+Stop Docker infrastructure:
+cd D:\InRideMart
+docker compose down -->
