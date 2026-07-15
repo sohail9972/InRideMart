@@ -14,6 +14,7 @@ Core style:
 - Redis for cache, rate limits, sessions, idempotency windows, and low-latency reads.
 - REST APIs documented through OpenAPI.
 - JWT authentication with short-lived access tokens and refresh-token rotation.
+- All customer-profile operations are protected by JWT authentication and restricted to the token subject, except for `ADMIN` users.
 - Kubernetes-native deployment with readiness/liveness probes.
 
 ## 2. High-Level Design
@@ -73,9 +74,15 @@ Authentication use cases:
 - Issue refresh token.
 - Validate bearer token.
 
+JWT boundary:
+
+- Access tokens include `token_use=access`, the authenticated user ID, and role.
+- Refresh tokens include `token_use=refresh` and are rejected by protected API endpoints.
+- Auth and customer services share the configured issuer and signing secret; a later platform module can centralize verification without changing API contracts.
+
 ## 4. Database Schema
 
-Each microservice owns its schema. Initial implemented schema:
+Each microservice owns its schema. Initial auth schema:
 
 ```sql
 CREATE TABLE user_accounts (
@@ -98,9 +105,14 @@ CREATE TABLE refresh_tokens (
 );
 ```
 
+Additional implemented schemas:
+
+- Customer: profiles with contact and default address fields.
+- Catalog: categories and active products, each with SKU, price, currency, image URL, and creation time.
+
 Future service schemas:
 
-- Customer: profiles, addresses, preferences.
+- Customer preferences.
 - Driver: driver profiles, vehicle documents, availability.
 - Merchant: merchant profiles, outlets, service zones.
 - Ride Booking: rides, stops, route snapshots, ETA events.
@@ -184,6 +196,15 @@ Implemented endpoints:
 - `POST /api/v1/auth/register`
 - `POST /api/v1/auth/login`
 - `GET /api/v1/auth/me`
+- `POST /api/v1/customers`
+- `GET /api/v1/customers/{id}`
+- `GET /api/v1/customers/by-user/{userId}`
+- `PUT /api/v1/customers/{id}`
+- `GET /api/v1/catalog/categories`
+- `GET /api/v1/catalog/products`
+- `GET /api/v1/catalog/products/{id}`
+
+Catalog search supports `query`, `category`, `minPrice`, `maxPrice`, `sort`, `page`, and `size` query parameters. Product discovery is public in the MVP; catalog administration will be restricted to merchant and admin roles in a future milestone.
 
 OpenAPI is generated at runtime:
 
@@ -204,17 +225,41 @@ services/auth-service
   src/main/resources
     db/migration
   src/test/java
+services/customer-service
+  src/main/java/com/inridemart/customer
+    domain
+    application
+    adapters/in/web
+    adapters/out/persistence
+    config
+  src/main/resources
+    db/migration
+  src/test/java
+services/catalog-service
+  src/main/java/com/inridemart/catalog
+    domain
+    application
+    adapters/in/web
+    adapters/out/persistence
+    config
+  src/main/resources
+    db/migration
+  src/test/java
+frontend
+  src/app
+  src/components
+  src/lib
 deploy/kubernetes/auth-service
 .github/workflows
 ```
 
 ## 9. Source Code
 
-The first source implementation is in `services/auth-service`.
+The current source implementations are in `services/auth-service`, `services/customer-service`, and `services/catalog-service`. The passenger catalog frontend is in `frontend` and uses a Next.js server-side proxy to reach the catalog API without browser-side CORS configuration.
 
 ## 10. Docker Compose
 
-`docker-compose.yml` starts PostgreSQL, Redis, Kafka, Zookeeper, and the auth service image.
+`docker-compose.yml` starts PostgreSQL, Redis, and Kafka for local development.
 
 ## 11. Kubernetes Manifests
 
@@ -226,12 +271,18 @@ GitHub Actions build, test, and package the Maven service. Container publishing 
 
 ## 13. Test Cases
 
-Current test coverage:
+Current auth test coverage:
 
 - Email value object validation.
 - Registration use case duplicate-email behavior.
 - Login use case credential validation.
 - Auth REST API happy path with H2-backed integration test.
+
+Current customer test coverage:
+
+- Customer profile domain validation.
+- Customer profile REST create/read/update flow with H2-backed integration test.
+- Duplicate customer profile conflict handling.
 
 ## 14. Deployment Guide
 
@@ -254,4 +305,3 @@ Current test coverage:
 - Use network policies, pod security standards, and least-privilege service accounts.
 - Enforce rate limits on auth and payment endpoints.
 - Run SAST, dependency scans, container scans, and IaC scans in CI.
-

@@ -44,11 +44,16 @@ class AuthControllerIntegrationTest {
                 .getContentAsString();
 
         String token = registerResponse.replaceAll(".*\"accessToken\":\"([^\"]+)\".*", "$1");
+        String refreshToken = registerResponse.replaceAll(".*\"refreshToken\":\"([^\"]+)\".*", "$1");
 
         mockMvc.perform(get("/api/v1/auth/me")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("api@example.com"));
+
+        mockMvc.perform(get("/api/v1/auth/me")
+                        .header("Authorization", "Bearer " + refreshToken))
+                .andExpect(status().isForbidden());
 
         mockMvc.perform(post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -62,4 +67,3 @@ class AuthControllerIntegrationTest {
                 .andExpect(jsonPath("$.refreshToken", notNullValue()));
     }
 }
-

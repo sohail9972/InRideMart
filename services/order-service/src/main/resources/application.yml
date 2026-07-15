@@ -1,0 +1,25 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: ${INRIDEMART_ORDER_DB_URL:jdbc:postgresql://localhost:5433/inridemart_order}
+    username: ${INRIDEMART_DB_USERNAME:inridemart}
+    password: ${INRIDEMART_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+security:
+  jwt:
+    issuer: ${INRIDEMART_JWT_ISSUER:inridemart-auth}
+    secret: ${JWT_SECRET}
+inridemart:
+  catalog:
+    base-url: ${INRIDEMART_CATALOG_BASE_URL:http://localhost:8083}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

@@ -11,6 +11,10 @@
 
     <modules>
         <module>services/auth-service</module>
+        <module>services/customer-service</module>
+        <module>services/catalog-service</module>
+        <module>services/order-service</module>
+        <module>services/cart-service</module>
     </modules>
 
     <properties>
@@ -65,4 +69,3 @@
         </pluginManagement>
     </build>
 </project>
-

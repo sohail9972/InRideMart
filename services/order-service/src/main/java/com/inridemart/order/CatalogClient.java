@@ -1,0 +1,3 @@
+package com.inridemart.order;
+import org.springframework.beans.factory.annotation.Value; import org.springframework.stereotype.Component; import org.springframework.web.client.RestClient; import java.math.BigDecimal; import java.util.UUID;
+@Component class CatalogClient { private final RestClient client; CatalogClient(@Value("${inridemart.catalog.base-url:http://localhost:8083}") String baseUrl){client=RestClient.builder().baseUrl(baseUrl).build();} Product get(UUID id){return client.get().uri("/api/v1/catalog/products/{id}",id).retrieve().body(Product.class);} record Product(UUID id,String name,BigDecimal price,String currency){} }
