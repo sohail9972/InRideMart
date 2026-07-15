@@ -29,6 +29,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (authorization != null && authorization.startsWith("Bearer ")) {
             try {
                 Claims claims = jwtTokenService.parse(authorization.substring(7));
+                if (!"access".equals(claims.get("token_use", String.class))) {
+                    throw new IllegalArgumentException("Only access tokens can authenticate requests");
+                }
                 String role = claims.get("role", String.class);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         UUID.fromString(claims.getSubject()),
@@ -43,4 +46,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
-

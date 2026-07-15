@@ -1,0 +1,3 @@
+package com.inridemart.order;
+import org.springframework.stereotype.Repository; import java.util.*;
+@Repository class OrderRepositoryAdapter { final OrderJpaRepository repo; OrderRepositoryAdapter(OrderJpaRepository r){repo=r;} Order save(Order o){return repo.save(new OrderEntity(o)).toDomain();} Optional<Order> find(UUID u,String k){return repo.findByUserIdAndIdempotencyKey(u,k).map(OrderEntity::toDomain);} List<Order> mine(UUID u){return repo.findByUserIdOrderByCreatedAtDesc(u).stream().map(OrderEntity::toDomain).toList();} Optional<Order> byId(UUID id){return repo.findById(id).map(OrderEntity::toDomain);} }

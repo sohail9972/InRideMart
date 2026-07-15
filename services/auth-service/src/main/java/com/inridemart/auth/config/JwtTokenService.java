@@ -40,7 +40,7 @@ public class JwtTokenService implements TokenService {
                 .subject(user.id().toString())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(expiresAt))
-                .claims(Map.of("email", user.email().value(), "role", user.role().name()))
+                .claims(Map.of("email", user.email().value(), "role", user.role().name(), "token_use", "access"))
                 .signWith(key)
                 .compact();
     }
@@ -54,6 +54,7 @@ public class JwtTokenService implements TokenService {
                 .subject(tokenId.toString())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(expiresAt))
+                .claim("token_use", "refresh")
                 .signWith(key)
                 .compact();
     }
@@ -77,4 +78,3 @@ public class JwtTokenService implements TokenService {
                 .getPayload();
     }
 }
-

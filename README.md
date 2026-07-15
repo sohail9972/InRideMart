@@ -9,13 +9,13 @@ This repository is organized as a modular monorepo. The first production-ready s
 | Module | Status |
 | --- | --- |
 | Authentication | Implemented |
-| Customer | Planned |
+| Customer | Implemented |
 | Driver | Planned |
 | Merchant | Planned |
 | Ride Booking | Planned |
-| Product Catalog | Planned |
-| Shopping Cart | Planned |
-| Orders | Planned |
+| Product Catalog | Implemented |
+| Shopping Cart | Implemented |
+| Orders | Implemented |
 | Inventory | Planned |
 | AI Recommendation | Planned |
 | Payments | Planned |
@@ -26,8 +26,7 @@ This repository is organized as a modular monorepo. The first production-ready s
 
 ## Quick Start
 
-The project currently has one implemented application service: `auth-service`.
-The remaining modules are planned and documented, but are not runnable services yet.
+The project currently includes `auth-service`, `customer-service`, and `catalog-service`. A Next.js passenger catalog frontend is available under `frontend`.
 
 ### Prerequisites
 
@@ -35,6 +34,7 @@ The remaining modules are planned and documented, but are not runnable services 
 - Maven
 - Docker Desktop
 - Docker Compose
+- Node.js 20.9 or later (for `frontend`)
 
 Verify the tools from PowerShell:
 
@@ -68,7 +68,7 @@ docker compose up -d
 
 This starts:
 
-- PostgreSQL on `5432`
+- PostgreSQL on `5433` (Docker uses this port to avoid a local PostgreSQL conflict)
 - Redis on `6379`
 - Kafka on `9092`
 
@@ -79,6 +79,15 @@ docker ps
 ```
 
 ### 2. Run Auth Service
+
+Set the local runtime secrets in the same PowerShell session. The values in `.env.example` are a template only; do not commit a real `.env` file.
+
+```powershell
+$env:INRIDEMART_DB_PASSWORD = "InRide@123"
+$env:JWT_SECRET = "replace-this-with-a-local-32-byte-minimum-secret"
+```
+
+Both services must use the same `JWT_SECRET`, because `customer-service` validates access tokens issued by `auth-service`.
 
 Run the Spring Boot service from the project root:
 
@@ -100,29 +109,104 @@ The application starts on:
 http://localhost:8081
 ```
 
-### 3. Verify the Application
+### 3. Run Customer Service
 
-Health check:
+The customer service uses a separate database named `inridemart_customer`. Fresh Docker volumes create this database automatically from `deploy/postgres/init`.
+
+If your PostgreSQL Docker volume already existed before this service was added, create the database manually once:
+
+```powershell
+docker exec -it inridemart-postgres psql -U inridemart -d inridemart_auth
+```
+
+Then run:
+
+```sql
+CREATE DATABASE inridemart_customer OWNER inridemart;
+GRANT ALL PRIVILEGES ON DATABASE inridemart_customer TO inridemart;
+\q
+```
+
+Run the Spring Boot service from the project root:
+
+```powershell
+cd D:\InRideMart
+mvn -pl services/customer-service spring-boot:run
+```
+
+The application starts on:
+
+```text
+http://localhost:8082
+```
+
+### 4. Verify the Applications
+
+Auth health check:
 
 ```text
 http://localhost:8081/actuator/health
 ```
 
-Swagger UI:
+Auth Swagger UI:
 
 ```text
 http://localhost:8081/swagger-ui.html
 ```
 
-or:
+Customer health check:
 
 ```text
-http://localhost:8081/swagger-ui/index.html
+http://localhost:8082/actuator/health
 ```
 
-### 4. Stop Services
+Customer Swagger UI:
 
-Stop the Spring Boot service with `Ctrl + C` in the terminal where it is running.
+```text
+http://localhost:8082/swagger-ui.html
+```
+
+### 5. Run Catalog Service
+
+The catalog service uses the `inridemart_catalog` database. Fresh Docker volumes create it automatically from `deploy/postgres/init`.
+
+For an existing PostgreSQL Docker volume, create it once:
+
+```powershell
+docker exec -it inridemart-postgres psql -U inridemart -d inridemart_auth -c "CREATE DATABASE inridemart_catalog OWNER inridemart;"
+```
+
+Start the service in a terminal that has `INRIDEMART_DB_PASSWORD` set:
+
+```powershell
+cd D:\InRideMart
+mvn -pl services/catalog-service spring-boot:run
+```
+
+Catalog endpoints are public for passenger discovery in this MVP:
+
+```text
+http://localhost:8083/actuator/health
+http://localhost:8083/swagger-ui.html
+http://localhost:8083/api/v1/catalog/categories
+http://localhost:8083/api/v1/catalog/products?query=charger&maxPrice=1000
+```
+
+### 6. Run Passenger Web
+
+In another terminal, install frontend dependencies once and start the Next.js development server:
+
+```powershell
+cd D:\InRideMart\frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`. The frontend reads `CATALOG_API_BASE_URL` from `frontend/.env.local` when an override is needed; see `frontend/.env.example`.
+
+### 7. Stop Services
+
+Stop each Spring Boot service with `Ctrl + C` in the terminal where it is running.
 
 Stop Docker infrastructure:
 
@@ -131,7 +215,8 @@ cd D:\InRideMart
 docker compose down
 ```
 
-Note: run the Spring Boot service with Maven on your machine for local development. The current `application.yml` points to `localhost` for PostgreSQL, Redis, and Kafka, which matches the ports exposed by `docker-compose.yml`.
+Note: run the Spring Boot services with Maven on your machine for local development. The current `application.yml` files point to `localhost` infrastructure ports exposed by `docker-compose.yml`.
+Database passwords, JWT signing keys, and infrastructure endpoints are read from environment variables at runtime. See `.env.example` for the supported local overrides.
 
 ## Architecture
 
@@ -711,3 +796,283 @@ Stop Services
 Stop Docker infrastructure:
 cd D:\InRideMart
 docker compose down -->
+
+
+
+
+
+
+
+
+<!-- Workflow We will Follow
+main
+ │
+ │
+ ├──────── Story-1
+ │             │
+ │             └──── PR ───► main
+ │
+ ├──────── Story-2
+ │             │
+ │             └──── PR ───► main
+ │
+ ├──────── Story-3
+ │             │
+ │             └──── PR ───► main
+ │
+ ├──────── Story-4
+ │
+ └──────── Story-5
+
+Each story should be independent.
+
+Exactly like companies.
+
+Step 1 Create GitHub Issues (Stories)
+
+Open your repository
+
+InRideMart
+
+Go to
+
+Issues
+
+Click
+
+New Issue
+
+Example
+
+Title
+
+IRM-001 Setup Authentication Service
+
+Description
+
+As a Rider
+
+I want authentication APIs
+
+So that I can securely login.
+
+Acceptance Criteria
+
+- Register API
+- Login API
+- JWT Token
+- Password Encryption
+- Unit Tests
+
+Click
+
+Create Issue
+
+Now create another.
+
+IRM-002 Driver Registration
+
+Another
+
+IRM-003 Rider Registration
+
+Another
+
+IRM-004 OTP Verification
+
+Another
+
+IRM-005 Forgot Password
+
+Eventually you'll have
+
+Issues
+
+IRM-001
+IRM-002
+IRM-003
+IRM-004
+IRM-005
+Step 2 Create Local Branch
+
+Go to project
+
+cd D:\InRideMart
+
+Initialize Git if not already done:
+
+git init
+
+Add your remote:
+
+git remote add origin https://github.com/sohail9972/InRideMart.git
+
+Fetch the remote branches:
+
+git fetch origin
+
+Create and switch to a story branch:
+
+git checkout -b feature/IRM-001-authentication
+
+Verify
+
+git branch
+
+Output
+
+* feature/IRM-001-authentication
+main
+Step 3 Start Coding
+
+Suppose you implement
+
+JWT
+Register API
+Login API
+Swagger
+Tests
+Step 4 Commit
+git add .
+git commit -m "IRM-001 Implement authentication APIs"
+Step 5 Push Branch
+git push origin feature/IRM-001-authentication
+
+GitHub will automatically suggest creating a Pull Request.
+
+Step 6 Raise Pull Request
+
+Open GitHub
+
+You'll see
+
+Compare & Pull Request
+
+Click it.
+
+Title
+
+IRM-001 Implement Authentication APIs
+
+Description
+
+Implemented
+
+✔ Register API
+
+✔ Login API
+
+✔ JWT Authentication
+
+✔ Password Encryption
+
+✔ Swagger
+
+✔ Unit Tests
+
+Fixes #1
+
+(Replace #1 with the actual issue number.)
+
+Click
+
+Create Pull Request
+Step 7 Review
+
+Even if you're working alone, review your own PR.
+
+Check
+
+API Design
+Code Quality
+Naming
+Test Cases
+Swagger
+Security
+
+This builds good engineering habits.
+
+Step 8 Merge
+
+Once satisfied
+
+Merge Pull Request
+
+Delete the feature branch on GitHub if prompted.
+
+Step 9 Update Local Main
+git checkout main
+git pull origin main
+
+Delete the local feature branch:
+
+git branch -d feature/IRM-001-authentication
+Then Start Next Story
+git checkout -b feature/IRM-002-driver-registration
+
+Implement
+
+Driver APIs
+
+Raise PR
+
+Merge
+
+Repeat.
+
+Story Naming Convention
+
+I recommend:
+
+feature/IRM-001-authentication
+
+feature/IRM-002-driver-registration
+
+feature/IRM-003-rider-registration
+
+feature/IRM-004-order-service
+
+feature/IRM-005-wallet-service
+
+feature/IRM-006-product-service
+
+feature/IRM-007-driver-inventory
+
+feature/IRM-008-payment-service
+
+feature/IRM-009-ride-integration
+
+feature/IRM-010-notification-service
+Commit Convention
+IRM-001 Add JWT Authentication
+
+IRM-001 Fix Login Validation
+
+IRM-002 Add Driver Entity
+
+IRM-002 Implement Driver Registration
+
+IRM-003 Add Rider APIs
+PR Naming
+[IRM-001] Authentication APIs
+
+[IRM-002] Driver Registration
+
+[IRM-003] Rider APIs
+Long-Term Roadmap for InRideMart
+Sprint	Stories
+Sprint 1	Auth Service
+Sprint 2	Rider Service
+Sprint 3	Driver Service
+Sprint 4	Product Catalog
+Sprint 5	Inventory
+Sprint 6	Order Service
+Sprint 7	Wallet
+Sprint 8	Payments
+Sprint 9	Ride Integration
+Sprint 10	Notifications
+Sprint 11	Recommendation Engine
+Sprint 12	Analytics Dashboard
+Sprint 13	Admin Portal
+Sprint 14	AI Recommendations
+Sprint 15	Production Deployment -->
