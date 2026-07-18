@@ -222,6 +222,71 @@ Database passwords, JWT signing keys, and infrastructure endpoints are read from
 
 Read the platform design package in [docs/system-design.md](docs/system-design.md).
 
+## Hackathon Demo Architecture
+
+```text
+Next.js passenger web -> Auth / Customer / Catalog / Cart / Order / Payment / AI
+                                                     |                 |
+                                                  PostgreSQL       OpenAI Responses API
+AI -> Catalog HTTP API (allow-listed products only) -> recommendations -> Cart
+Cart -> Order checkout -> Payment -> Order CONFIRMED -> HANDED_OVER -> COMPLETED
+```
+
+| Service | Port | Owns |
+| --- | --- | --- |
+| Auth | 8081 | Registration, login, JWT issuance |
+| Customer | 8082 | Passenger profiles |
+| Catalog | 8083 | Available in-ride products |
+| Cart | 8084 | Passenger carts |
+| Order | 8085 | Checkout and in-ride status tracking |
+| AI | 8086 | Catalog-grounded shopping recommendations |
+| Payment | 8087 | Mock payment records and confirmation |
+
+All services validate the Auth-issued JWT using `JWT_SECRET`; each owns its own PostgreSQL database. AI never reads Catalog data directly from a database: it calls the Catalog HTTP API and only returns products supplied by that API.
+
+### AI Setup
+
+Set `OPENAI_API_KEY` and a configurable `OPENAI_MODEL` to enable Responses API reasoning. With no API key, AI Service uses deterministic, catalog-grounded recommendations so the demo remains runnable locally.
+
+```powershell
+$env:INRIDEMART_DB_PASSWORD = "InRide@123"
+$env:JWT_SECRET = "your-local-32-byte-minimum-secret"
+$env:OPENAI_API_KEY = ""
+$env:OPENAI_MODEL = ""
+docker compose up -d
+```
+
+Start each service with `mvn -pl services/<service-name> spring-boot:run`, then run `npm run dev` from `frontend`. Swagger is available at `http://localhost:<port>/swagger-ui.html`; the AI passenger experience is at `http://localhost:3000/ai`.
+
+### Demo Walkthrough
+
+1. Register and log in through Auth Service, then create a Customer profile.
+2. Browse the public Catalog and ask AI Shopping for an in-ride need such as “I forgot my charger and have 800 INR”.
+3. Add an AI recommendation to Cart and call checkout with an `Idempotency-Key`.
+4. Process the mock payment with `POST /api/v1/payments`; the Order becomes `CONFIRMED`.
+5. Advance the in-ride order with `PATCH /api/v1/orders/{id}/tracking` to `HANDED_OVER`, then `COMPLETED`.
+
+### Frontend
+
+The Next.js passenger app lives in `frontend` and is designed as a mobile-first client over the existing HTTP APIs.
+
+| Route | Experience |
+| --- | --- |
+| `/` | Home, featured live Catalog products, category filters, Cart, Orders, tracking timeline, and profile login |
+| `/ai` | Authenticated AI Shopping chat, conversation history, recommendation cards, suggested journey prompts, and direct Cart adds |
+| `/api/catalog/*` | Catalog read proxy used by server-rendered and client Catalog views |
+| `/api/proxy/{service}/*` | Same-origin proxy for Auth, Customer, Cart, Order, AI, and Payment APIs; it forwards the caller's Authorization and idempotency headers |
+
+Run the frontend:
+
+```powershell
+cd D:\InRideMart\frontend
+npm install
+npm run dev
+```
+
+Use `npm run lint` and `npm run build` before demoing. Product cards are always populated from Catalog Service; catalog expansion belongs in Catalog database migrations, never in frontend constants.
+
 
 
 # InRideMart - Local Development Setup Guide

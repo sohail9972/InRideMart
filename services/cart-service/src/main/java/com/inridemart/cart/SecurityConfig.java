@@ -29,7 +29,7 @@ import java.util.UUID;
 @Configuration
 class SecurityConfig {
     @Bean SecurityFilterChain chain(HttpSecurity http, JwtFilter filter) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
+        return http.csrf(AbstractHttpConfigurer::disable).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll().anyRequest().authenticated()).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
     @Bean JwtFilter jwtFilter(@Value("${security.jwt.secret}") String secret, @Value("${security.jwt.issuer}") String issuer) { return new JwtFilter(secret, issuer); }
     static class JwtFilter extends OncePerRequestFilter {

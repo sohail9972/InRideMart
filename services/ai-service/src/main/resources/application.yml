@@ -1,0 +1,27 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: ai-service
+security:
+  jwt:
+    issuer: ${INRIDEMART_JWT_ISSUER:inridemart-auth}
+    secret: ${JWT_SECRET}
+inridemart:
+  catalog:
+    base-url: ${INRIDEMART_CATALOG_BASE_URL:http://localhost:8083}
+  customer:
+    base-url: ${INRIDEMART_CUSTOMER_BASE_URL:http://localhost:8082}
+openai:
+  api-key: ${OPENAI_API_KEY:}
+  model: ${OPENAI_MODEL:}
+  temperature: ${OPENAI_TEMPERATURE:0.2}
+  max-output-tokens: ${OPENAI_MAX_OUTPUT_TOKENS:350}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

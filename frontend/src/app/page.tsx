@@ -1,11 +1,11 @@
-import { CatalogBrowser } from "@/components/catalog-browser";
+import { Storefront } from "@/components/storefront";
 import { getCategories, getProducts } from "@/lib/catalog";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { categories, productPage } = await loadCatalog();
-  return <CatalogBrowser categories={categories} initialProducts={productPage} />;
+  return <Storefront categories={categories} initialProducts={productPage} />;
 }
 
 async function loadCatalog() {
