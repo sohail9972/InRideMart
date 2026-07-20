@@ -379,12 +379,12 @@ The following are **not implemented** in the current hackathon MVP:
 - Predictive recommendations based on opted-in history.
 - Loyalty rewards, offers, and repeat-purchase flows.
 
+## 📄 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
 ## Contributors
 
 | Contributor | Role |
 | --- | --- |
 | [sohail9972](https://github.com/sohail9972) | Project creator and primary contributor |
-
-## License
-
-No license file is currently included in this repository. All rights are reserved unless the project owner adds an explicit license.
