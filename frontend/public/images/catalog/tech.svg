@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Travel technology</title>
+  <rect width="640" height="480" fill="#e9e8fa"/>
+  <circle cx="320" cy="220" r="132" fill="#b7b5e8"/>
+  <rect x="231" y="135" width="178" height="174" rx="22" fill="#fffaf0" stroke="#3d418c" stroke-width="11"/>
+  <rect x="278" y="167" width="84" height="53" rx="10" fill="#3d418c"/>
+  <path d="M276 274h88M294 309v39M346 309v39M279 348h82" fill="none" stroke="#ed7258" stroke-width="11" stroke-linecap="round"/>
+</svg>

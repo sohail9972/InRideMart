@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Portable power</title>
+  <rect width="640" height="480" fill="#e3f0ed"/>
+  <circle cx="320" cy="220" r="132" fill="#9ccfc2"/>
+  <rect x="244" y="143" width="152" height="194" rx="25" fill="#fffaf0" stroke="#136f73" stroke-width="11"/>
+  <rect x="284" y="174" width="72" height="54" rx="9" fill="#136f73"/>
+  <path d="M320 250v50M296 274h48" stroke="#ed7258" stroke-width="11" stroke-linecap="round"/>
+</svg>

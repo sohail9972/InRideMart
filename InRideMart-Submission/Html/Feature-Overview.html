@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InRideMart Feature Overview</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #dfe8ea; color: #172033; font-family: Arial, "Segoe UI", sans-serif; }
+    body.portrait .page { width: 210mm; min-height: 297mm; }
+    .page { position: relative; overflow: hidden; background: #FFFDFC; padding: 14mm 15mm 18mm; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+    .eyebrow { color: #007F82; font-size: 9pt; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 5px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: 30pt; line-height: 1.08; letter-spacing: 0; margin-bottom: 12px; }
+    h2 { font-size: 18pt; line-height: 1.2; letter-spacing: 0; margin-bottom: 10px; }
+    h3 { font-size: 11.5pt; line-height: 1.25; letter-spacing: 0; margin-bottom: 6px; }
+    p, li, td, th { font-size: 9.5pt; line-height: 1.52; }
+    p { margin-bottom: 9px; }
+    ul, ol { margin: 0 0 12px 19px; padding: 0; }
+    li { margin: 3px 0; }
+    .lede { color: #536276; font-size: 13pt; line-height: 1.45; max-width: 158mm; }
+    .muted { color: #536276; }
+    .tiny { color: #536276; font-size: 7.8pt; line-height: 1.4; }
+    .rule { height: 1px; background: #D9E3E6; margin: 12px 0; }
+    .accent-line { width: 48px; height: 5px; border-radius: 3px; background: #EE6C4D; margin: 11px 0 15px; }
+    .hero-grid { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 14mm; align-items: center; min-height: 190mm; }
+    .hero-mark { position: relative; min-height: 145mm; border-radius: 18px; background: linear-gradient(145deg, #172033 0%, #273a52 58%, #007F82 160%); padding: 9mm; color: white; overflow: hidden; }
+    .hero-mark:before { content: ""; position: absolute; width: 140mm; height: 140mm; right: -72mm; bottom: -64mm; border: 20px solid rgba(255,255,255,.12); border-radius: 50%; }
+    .hero-mark:after { content: ""; position: absolute; width: 62mm; height: 62mm; top: -26mm; left: -20mm; border: 13px solid rgba(238,108,77,.78); border-radius: 50%; }
+    .brand { position: relative; font-size: 15pt; font-weight: 800; letter-spacing: 0; margin: 0; white-space: nowrap; }
+    .brand-sub { position: relative; color: #dce9ec; font-size: 10pt; max-width: 48mm; margin-top: 9px; }
+    .ride-chip { position: relative; display: inline-flex; align-items: center; gap: 7px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 7px 9px; margin-top: 18mm; font-size: 7.5pt; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #EE6C4D; display: inline-block; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-top: 12px; }
+    .stat { background: #EDF6F7; border: 1px solid #D9E3E6; padding: 10px; border-radius: 8px; }
+    .stat strong { display: block; color: #007F82; font-size: 18pt; }
+    .stat span { color: #536276; font-size: 8pt; line-height: 1.25; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .card { border: 1px solid #D9E3E6; border-radius: 8px; background: white; padding: 11px; }
+    .card.highlight { background: #EDF6F7; border-color: #b9dfe0; }
+    .card.coral { background: #fff3ef; border-color: #f3c3b6; }
+    .card h3 { margin-bottom: 5px; }
+    .card p { color: #536276; font-size: 8.6pt; margin: 0; line-height: 1.42; }
+    .icon { width: 28px; height: 28px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; background: #007F82; color: white; font-weight: 800; font-size: 11pt; margin-bottom: 7px; }
+    .icon.coral { background: #EE6C4D; }
+    .icon.gold { background: #F2B84B; color: #172033; }
+    .callout { padding: 10px 12px; border-left: 4px solid #007F82; background: #EDF6F7; color: #29444b; margin: 10px 0; font-size: 9pt; line-height: 1.45; }
+    .callout.warn { border-left-color: #EE6C4D; background: #fff3ef; color: #703425; }
+    .pill { display: inline-block; background: #e1f0ef; color: #126668; border-radius: 999px; padding: 3px 7px; margin: 0 4px 5px 0; font-size: 7.7pt; font-weight: 700; }
+    .pill.coral { background: #fbe1d8; color: #a23b26; }
+    table { width: 100%; border-collapse: collapse; margin: 7px 0 11px; }
+    th { text-align: left; color: #007F82; font-size: 8.2pt; text-transform: uppercase; letter-spacing: .6px; padding: 7px 6px; border-bottom: 1px solid #D9E3E6; }
+    td { vertical-align: top; padding: 7px 6px; border-bottom: 1px solid #e8eff0; font-size: 8.5pt; }
+    code { display: inline-block; background: #eff3f4; border: 1px solid #D9E3E6; color: #263b4b; border-radius: 4px; padding: 1px 4px; font-family: Consolas, monospace; font-size: 7.7pt; }
+    pre { margin: 7px 0 10px; padding: 9px 10px; border-radius: 7px; background: #172033; color: #ebf6f8; font: 7.7pt/1.5 Consolas, monospace; white-space: pre-wrap; }
+    .toc { columns: 2; column-gap: 12mm; margin-top: 12px; }
+    .toc div { break-inside: avoid; display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted #b4c5c9; padding: 5px 0; font-size: 9pt; }
+    .toc span:last-child { color: #007F82; font-weight: 800; }
+    .footer { position: absolute; bottom: 7mm; left: 15mm; right: 15mm; display: flex; justify-content: space-between; color: #6d7b8b; font-size: 7pt; border-top: 1px solid #D9E3E6; padding-top: 3mm; }
+    .flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin: 8px 0; }
+    .flow .node { padding: 7px 9px; border-radius: 6px; border: 1px solid #D9E3E6; background: white; font-size: 8.2pt; font-weight: 700; }
+    .flow .node.primary { background: #007F82; color: white; border-color: #007F82; }
+    .flow .node.coral { background: #EE6C4D; color: white; border-color: #EE6C4D; }
+    .flow .arrow { color: #EE6C4D; font-size: 14pt; font-weight: 800; }
+    .step { display: grid; grid-template-columns: 13mm 1fr; gap: 8px; align-items: start; margin-bottom: 10px; }
+    .step-num { width: 11mm; height: 11mm; display: flex; align-items: center; justify-content: center; background: #007F82; border-radius: 50%; color: white; font-weight: 800; font-size: 10pt; }
+    .step h3 { margin: 1px 0 3px; }
+    .step p { color: #536276; margin: 0; font-size: 8.8pt; }
+    .screen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .screen-card { border: 1px solid #D9E3E6; background: white; border-radius: 8px; overflow: hidden; }
+    .screen-card img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid #D9E3E6; }
+    .screen-card div { padding: 8px 9px 9px; }
+    .screen-card h3 { font-size: 10pt; margin: 0 0 3px; }
+    .screen-card p { margin: 0; color: #536276; font-size: 7.8pt; line-height: 1.35; }
+    .mini-note { color: #a23b26; font-size: 7pt; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; }
+    .stack-card { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 9px; min-height: 75px; }
+    .stack-card .mark { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; background: #007F82; font-size: 8pt; font-weight: 800; }
+    .stack-card:nth-child(3n+2) .mark { background: #EE6C4D; }
+    .stack-card:nth-child(3n) .mark { background: #F2B84B; color: #172033; }
+    .stack-card h3 { font-size: 9pt; margin: 0 0 2px; }
+    .stack-card p { color: #536276; font-size: 7.5pt; line-height: 1.35; margin: 0; }
+    .quote { color: #007F82; font-size: 18pt; font-weight: 800; line-height: .8; }
+    .architecture { margin: 8mm auto 0; max-width: 257mm; }
+    .arch-top { display: flex; justify-content: center; gap: 6px; align-items: center; }
+    .arch-box { text-align: center; min-width: 40mm; padding: 9px 10px; border: 1px solid #D9E3E6; border-radius: 8px; background: white; font-size: 8.6pt; font-weight: 800; }
+    .arch-box.primary { background: #007F82; border-color: #007F82; color: white; }
+    .arch-box.dark { background: #172033; border-color: #172033; color: white; }
+    .arch-box.coral { background: #EE6C4D; border-color: #EE6C4D; color: white; }
+    .arch-arrow { text-align: center; color: #EE6C4D; font-size: 17pt; font-weight: 800; margin: 4px; }
+    .service-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .service-grid .arch-box { min-width: 0; padding: 9px 4px; font-size: 7.5pt; }
+    .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; max-width: 180mm; margin: 0 auto; }
+    .connector-row { height: 12mm; position: relative; }
+    .connector-row:before { content: ""; position: absolute; top: 0; left: 50%; height: 100%; border-left: 2px solid #EE6C4D; }
+    .connector-row:after { content: ""; position: absolute; bottom: -1px; left: calc(50% - 4px); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #EE6C4D; }
+    .diagram-legend { display: flex; justify-content: center; gap: 16px; margin-top: 9mm; color: #536276; font-size: 8pt; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; background: #007F82; }
+    .legend-dot.coral { background: #EE6C4D; }
+    .roadmap { display: grid; grid-template-columns: 30mm 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid #D9E3E6; }
+    .roadmap strong { color: #007F82; font-size: 8.5pt; text-transform: uppercase; letter-spacing: .6px; }
+    .roadmap div { color: #536276; font-size: 8.8pt; line-height: 1.45; }
+  </style>
+</head>
+<body class="portrait">
+<section class="page">
+    <div class="eyebrow">Product Experience</div><h1 style="font-size:27pt">Feature Overview</h1><p class="lede">A mobile-first in-ride shopping flow designed around the passenger's immediate travel needs.</p><div class="callout warn"><strong>Screenshot package:</strong> The visual panels in this PDF are intentional placeholders, not fabricated application screenshots. Replace each PNG in <code>Screenshots/</code> with a current capture of the running product before final Devpost upload.</div><div class="screen-grid">
+      <article class="screen-card"><img src="../Screenshots/Home.png" alt="Landing and Home placeholder"/><div><h3>Landing and Home</h3><p>The landing experience introduces InRideMart to guests. Once authenticated, Home surfaces ride context, cab-available products, personalized ideas, travel essentials, and bundles.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/Catalog.png" alt="Product Catalog placeholder"/><div><h3>Product Catalog</h3><p>Guests can browse the catalog, while authenticated passengers can move relevant items into cart. Catalog remains the source of truth for product names, prices, and availability.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/AI-Chat.png" alt="AI Shopping Assistant placeholder"/><div><h3>AI Shopping Assistant</h3><p>A conversational chat experience handles greetings, asks concise follow-up questions for ambiguous needs, and factors in travel context before recommendations.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/Recommendations.png" alt="Smart Recommendations placeholder"/><div><h3>Smart Recommendations</h3><p>Recommendation cards explain why a catalog item fits the journey and offer optional bundles. Recommendations remain grounded in catalog and cab-available data.</p></div></article>
+    </div>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 1 of 3</span></footer>
+  </section>
+<section class="page">
+    <div class="eyebrow">Purchase Journey</div><h2>From Need to Confirmation</h2><div class="accent-line"></div><div class="screen-grid">
+      <article class="screen-card"><img src="../Screenshots/Cart.png" alt="Cart placeholder"/><div><h3>Cart</h3><p>The cart view presents item quantities, per-item prices, subtotal, and grand total before checkout. Authentication protects purchase actions.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/Checkout.png" alt="Checkout placeholder"/><div><h3>Checkout</h3><p>Checkout converts the authenticated cart into an order through the Order service and clears the cart after a successful result.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/Payment.png" alt="Mock Payment placeholder"/><div><h3>Mock Payment</h3><p>The mock payment UI offers UPI, credit card, debit card, and wallet methods. A successful payment becomes PAID and drives order confirmation.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/OrderTracking.png" alt="Order Tracking placeholder"/><div><h3>Order Tracking</h3><p>Passengers can retrieve the order and observe the simplified tracking lifecycle: PLACED, CONFIRMED, HANDED_OVER, and COMPLETED.</p></div></article>
+    </div><div class="flow" style="margin-top:14px"><span class="node">Cart</span><span class="arrow">-></span><span class="node">Checkout</span><span class="arrow">-></span><span class="node coral">Mock Payment</span><span class="arrow">-></span><span class="node primary">Confirmed Order</span></div>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 2 of 3</span></footer>
+  </section>
+<section class="page">
+    <div class="eyebrow">Travel Assistance</div><h2>Context, Inventory, and Translation</h2><div class="accent-line"></div><div class="screen-grid">
+      <article class="screen-card"><img src="../Screenshots/Catalog.png" alt="Assigned Cab Inventory placeholder"/><div><h3>Assigned Cab Inventory</h3><p>The frontend uses an assigned demo cab inventory allow-list over the existing catalog. This feature demonstrates availability-aware shopping; live driver inventory synchronization is future scope.</p><div class="mini-note">Demo inventory - not live driver inventory</div></div></article>
+      <article class="screen-card"><img src="../Screenshots/Translation.png" alt="Multilingual Travel Assistant placeholder"/><div><h3>Multilingual Travel Assistant</h3><p>The AI service supports passenger-driver translation and detects language automatically. When configured, GPT-5.6 is used for live translation; a local fallback is shown only when the live model is unavailable.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/Recommendations.png" alt="Ride Context placeholder"/><div><h3>Ride Context</h3><p>Destination, journey duration, weather, and travel purpose can be captured on Home and supplied with AI requests to make recommendations more relevant.</p></div></article>
+      <article class="screen-card"><img src="../Screenshots/AI-Chat.png" alt="Contextual Bundles placeholder"/><div><h3>Contextual Bundles</h3><p>Travel Kit, Charging Kit, Road Trip Pack, Rainy Day Kit, and Healthy Snacks Pack are presented only when their catalog items are available and relevant.</p></div></article>
+    </div><div class="callout">Accessibility and responsiveness are part of the frontend baseline: mobile-first layouts, loading and error states, protected routes, keyboard-friendly controls, and readable contrast.</div>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 3 of 3</span></footer>
+  </section>
+</body>
+</html>

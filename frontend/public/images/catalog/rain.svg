@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Rain protection</title>
+  <rect width="640" height="480" fill="#e4f1f7"/>
+  <circle cx="320" cy="220" r="132" fill="#a6cedd"/>
+  <path d="M226 239c32-69 72-104 94-104s62 35 94 104H226z" fill="#fffaf0" stroke="#24627a" stroke-width="11" stroke-linejoin="round"/>
+  <path d="M320 239v105M320 344c0 27 31 31 38 7" fill="none" stroke="#24627a" stroke-width="11" stroke-linecap="round"/>
+  <path d="M251 291l-15 28M295 291l-15 28M339 291l-15 28M383 291l-15 28" stroke="#ed7258" stroke-width="9" stroke-linecap="round"/>
+</svg>

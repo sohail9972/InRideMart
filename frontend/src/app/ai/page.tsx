@@ -1,2 +1,4 @@
 import { AiShopping } from "@/components/ai-shopping";
-export default function AiPage() { return <AiShopping />; }
+import { AuthGate } from "@/components/auth-gate";
+
+export default function AiPage() { return <AuthGate><AiShopping /></AuthGate>; }

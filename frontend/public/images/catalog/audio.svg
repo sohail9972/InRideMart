@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Travel audio</title>
+  <rect width="640" height="480" fill="#eee9fa"/>
+  <circle cx="320" cy="220" r="132" fill="#c9b9e8"/>
+  <path d="M238 218c0-57 37-96 82-96s82 39 82 96v76h-42v-64h-80v64h-42z" fill="#fffaf0" stroke="#563d8e" stroke-width="11"/>
+  <path d="M278 226h84M278 258h84" stroke="#ed7258" stroke-width="11" stroke-linecap="round"/>
+</svg>

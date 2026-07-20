@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Refreshments</title>
+  <rect width="640" height="480" fill="#e9f5fb"/>
+  <circle cx="320" cy="220" r="132" fill="#9dd8e8"/>
+  <path d="M260 132h120l-12 218c-2 26-18 42-48 42s-46-16-48-42z" fill="#fffaf0" stroke="#126b7a" stroke-width="10"/>
+  <path d="M256 179h128" stroke="#126b7a" stroke-width="10"/>
+  <path d="M289 217h62M289 247h62" stroke="#ed7258" stroke-width="12" stroke-linecap="round"/>
+  <path d="M355 138c16-31 36-43 57-57" fill="none" stroke="#126b7a" stroke-width="10" stroke-linecap="round"/>
+</svg>
