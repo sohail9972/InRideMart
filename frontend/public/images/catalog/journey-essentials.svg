@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Travel essentials</title>
+  <rect width="640" height="480" fill="#e6f3f1"/>
+  <circle cx="320" cy="220" r="132" fill="#9ed6ca"/>
+  <path d="M238 170c36-42 128-42 164 0l-10 126c-2 22-20 38-42 38h-60c-22 0-40-16-42-38z" fill="#f7f3e8" stroke="#136f73" stroke-width="10"/>
+  <path d="M238 190c34 20 128 20 164 0" fill="none" stroke="#136f73" stroke-width="10"/>
+  <path d="M478 174v174M436 216h84M457 216c-25-25-46-52-46-75 0-20 14-34 34-34 22 0 33 20 33 42 0-22 11-42 33-42 20 0 34 14 34 34 0 23-21 50-46 75" fill="none" stroke="#ed7258" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

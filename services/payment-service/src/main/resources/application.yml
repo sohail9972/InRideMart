@@ -1,0 +1,19 @@
+server:
+  port: 8087
+spring:
+  datasource:
+    url: ${INRIDEMART_PAYMENT_DB_URL:jdbc:postgresql://localhost:5433/inridemart_payment}
+    username: ${INRIDEMART_DB_USERNAME:inridemart}
+    password: ${INRIDEMART_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+security:
+  jwt:
+    issuer: ${INRIDEMART_JWT_ISSUER:inridemart-auth}
+    secret: ${JWT_SECRET}
+inridemart:
+  order:
+    base-url: ${INRIDEMART_ORDER_BASE_URL:http://localhost:8085}

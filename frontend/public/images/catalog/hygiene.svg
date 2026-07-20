@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Travel hygiene</title>
+  <rect width="640" height="480" fill="#e5f4ee"/>
+  <circle cx="320" cy="220" r="132" fill="#a9dac6"/>
+  <rect x="255" y="160" width="130" height="174" rx="25" fill="#fffaf0" stroke="#247b67" stroke-width="11"/>
+  <path d="M280 160v-27h80v27M280 210h80M280 249h80M280 288h50" fill="none" stroke="#247b67" stroke-width="10" stroke-linecap="round"/>
+  <path d="M362 287l12 12 24-28" fill="none" stroke="#ed7258" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

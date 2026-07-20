@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Comfort care</title>
+  <rect width="640" height="480" fill="#f7e9df"/>
+  <circle cx="320" cy="220" r="132" fill="#e7bca5"/>
+  <rect x="255" y="139" width="130" height="204" rx="28" fill="#fffaf0" stroke="#a95843" stroke-width="11"/>
+  <path d="M279 191h82M279 229h82M279 267h52" stroke="#a95843" stroke-width="10" stroke-linecap="round"/>
+  <path d="M353 283l10 10 21-25" fill="none" stroke="#ed7258" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -40,5 +40,5 @@ export function getCategories(): Promise<Category[]> {
 }
 
 export function getProducts(search = ""): Promise<ProductPage> {
-  return catalogFetch<ProductPage>(`/api/v1/catalog/products?size=12${search}`);
+  return catalogFetch<ProductPage>(`/api/v1/catalog/products?size=50${search}`);
 }

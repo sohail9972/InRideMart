@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Quick meals</title>
+  <rect width="640" height="480" fill="#fff1d9"/>
+  <circle cx="320" cy="220" r="132" fill="#f3c27f"/>
+  <path d="M236 177c0-24 38-42 84-42s84 18 84 42v113c0 25-38 47-84 47s-84-22-84-47z" fill="#ed7258" stroke="#8e3d32" stroke-width="10"/>
+  <path d="M253 184c23 16 111 16 134 0M266 220c31 14 77 14 108 0M274 258c26 12 66 12 92 0" fill="none" stroke="#fff0c8" stroke-width="11" stroke-linecap="round"/>
+</svg>

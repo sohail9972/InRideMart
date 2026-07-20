@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+  <title id="title">Wellness essentials</title>
+  <rect width="640" height="480" fill="#f9e8e4"/>
+  <circle cx="320" cy="220" r="132" fill="#efb5ae"/>
+  <rect x="242" y="151" width="156" height="181" rx="24" fill="#fffaf0" stroke="#a24d55" stroke-width="10"/>
+  <path d="M280 151v-27h80v27M271 206h98M271 236h98M271 266h63" fill="none" stroke="#a24d55" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="350" cy="280" r="17" fill="#ed7258"/>
+</svg>

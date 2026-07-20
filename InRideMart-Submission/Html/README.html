@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InRideMart Submission Readme</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #dfe8ea; color: #172033; font-family: Arial, "Segoe UI", sans-serif; }
+    body.portrait .page { width: 210mm; min-height: 297mm; }
+    .page { position: relative; overflow: hidden; background: #FFFDFC; padding: 14mm 15mm 18mm; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+    .eyebrow { color: #007F82; font-size: 9pt; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 5px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: 30pt; line-height: 1.08; letter-spacing: 0; margin-bottom: 12px; }
+    h2 { font-size: 18pt; line-height: 1.2; letter-spacing: 0; margin-bottom: 10px; }
+    h3 { font-size: 11.5pt; line-height: 1.25; letter-spacing: 0; margin-bottom: 6px; }
+    p, li, td, th { font-size: 9.5pt; line-height: 1.52; }
+    p { margin-bottom: 9px; }
+    ul, ol { margin: 0 0 12px 19px; padding: 0; }
+    li { margin: 3px 0; }
+    .lede { color: #536276; font-size: 13pt; line-height: 1.45; max-width: 158mm; }
+    .muted { color: #536276; }
+    .tiny { color: #536276; font-size: 7.8pt; line-height: 1.4; }
+    .rule { height: 1px; background: #D9E3E6; margin: 12px 0; }
+    .accent-line { width: 48px; height: 5px; border-radius: 3px; background: #EE6C4D; margin: 11px 0 15px; }
+    .hero-grid { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 14mm; align-items: center; min-height: 190mm; }
+    .hero-mark { position: relative; min-height: 145mm; border-radius: 18px; background: linear-gradient(145deg, #172033 0%, #273a52 58%, #007F82 160%); padding: 9mm; color: white; overflow: hidden; }
+    .hero-mark:before { content: ""; position: absolute; width: 140mm; height: 140mm; right: -72mm; bottom: -64mm; border: 20px solid rgba(255,255,255,.12); border-radius: 50%; }
+    .hero-mark:after { content: ""; position: absolute; width: 62mm; height: 62mm; top: -26mm; left: -20mm; border: 13px solid rgba(238,108,77,.78); border-radius: 50%; }
+    .brand { position: relative; font-size: 15pt; font-weight: 800; letter-spacing: 0; margin: 0; white-space: nowrap; }
+    .brand-sub { position: relative; color: #dce9ec; font-size: 10pt; max-width: 48mm; margin-top: 9px; }
+    .ride-chip { position: relative; display: inline-flex; align-items: center; gap: 7px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 7px 9px; margin-top: 18mm; font-size: 7.5pt; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #EE6C4D; display: inline-block; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-top: 12px; }
+    .stat { background: #EDF6F7; border: 1px solid #D9E3E6; padding: 10px; border-radius: 8px; }
+    .stat strong { display: block; color: #007F82; font-size: 18pt; }
+    .stat span { color: #536276; font-size: 8pt; line-height: 1.25; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .card { border: 1px solid #D9E3E6; border-radius: 8px; background: white; padding: 11px; }
+    .card.highlight { background: #EDF6F7; border-color: #b9dfe0; }
+    .card.coral { background: #fff3ef; border-color: #f3c3b6; }
+    .card h3 { margin-bottom: 5px; }
+    .card p { color: #536276; font-size: 8.6pt; margin: 0; line-height: 1.42; }
+    .icon { width: 28px; height: 28px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; background: #007F82; color: white; font-weight: 800; font-size: 11pt; margin-bottom: 7px; }
+    .icon.coral { background: #EE6C4D; }
+    .icon.gold { background: #F2B84B; color: #172033; }
+    .callout { padding: 10px 12px; border-left: 4px solid #007F82; background: #EDF6F7; color: #29444b; margin: 10px 0; font-size: 9pt; line-height: 1.45; }
+    .callout.warn { border-left-color: #EE6C4D; background: #fff3ef; color: #703425; }
+    .pill { display: inline-block; background: #e1f0ef; color: #126668; border-radius: 999px; padding: 3px 7px; margin: 0 4px 5px 0; font-size: 7.7pt; font-weight: 700; }
+    .pill.coral { background: #fbe1d8; color: #a23b26; }
+    table { width: 100%; border-collapse: collapse; margin: 7px 0 11px; }
+    th { text-align: left; color: #007F82; font-size: 8.2pt; text-transform: uppercase; letter-spacing: .6px; padding: 7px 6px; border-bottom: 1px solid #D9E3E6; }
+    td { vertical-align: top; padding: 7px 6px; border-bottom: 1px solid #e8eff0; font-size: 8.5pt; }
+    code { display: inline-block; background: #eff3f4; border: 1px solid #D9E3E6; color: #263b4b; border-radius: 4px; padding: 1px 4px; font-family: Consolas, monospace; font-size: 7.7pt; }
+    pre { margin: 7px 0 10px; padding: 9px 10px; border-radius: 7px; background: #172033; color: #ebf6f8; font: 7.7pt/1.5 Consolas, monospace; white-space: pre-wrap; }
+    .toc { columns: 2; column-gap: 12mm; margin-top: 12px; }
+    .toc div { break-inside: avoid; display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted #b4c5c9; padding: 5px 0; font-size: 9pt; }
+    .toc span:last-child { color: #007F82; font-weight: 800; }
+    .footer { position: absolute; bottom: 7mm; left: 15mm; right: 15mm; display: flex; justify-content: space-between; color: #6d7b8b; font-size: 7pt; border-top: 1px solid #D9E3E6; padding-top: 3mm; }
+    .flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin: 8px 0; }
+    .flow .node { padding: 7px 9px; border-radius: 6px; border: 1px solid #D9E3E6; background: white; font-size: 8.2pt; font-weight: 700; }
+    .flow .node.primary { background: #007F82; color: white; border-color: #007F82; }
+    .flow .node.coral { background: #EE6C4D; color: white; border-color: #EE6C4D; }
+    .flow .arrow { color: #EE6C4D; font-size: 14pt; font-weight: 800; }
+    .step { display: grid; grid-template-columns: 13mm 1fr; gap: 8px; align-items: start; margin-bottom: 10px; }
+    .step-num { width: 11mm; height: 11mm; display: flex; align-items: center; justify-content: center; background: #007F82; border-radius: 50%; color: white; font-weight: 800; font-size: 10pt; }
+    .step h3 { margin: 1px 0 3px; }
+    .step p { color: #536276; margin: 0; font-size: 8.8pt; }
+    .screen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .screen-card { border: 1px solid #D9E3E6; background: white; border-radius: 8px; overflow: hidden; }
+    .screen-card img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid #D9E3E6; }
+    .screen-card div { padding: 8px 9px 9px; }
+    .screen-card h3 { font-size: 10pt; margin: 0 0 3px; }
+    .screen-card p { margin: 0; color: #536276; font-size: 7.8pt; line-height: 1.35; }
+    .mini-note { color: #a23b26; font-size: 7pt; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; }
+    .stack-card { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 9px; min-height: 75px; }
+    .stack-card .mark { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; background: #007F82; font-size: 8pt; font-weight: 800; }
+    .stack-card:nth-child(3n+2) .mark { background: #EE6C4D; }
+    .stack-card:nth-child(3n) .mark { background: #F2B84B; color: #172033; }
+    .stack-card h3 { font-size: 9pt; margin: 0 0 2px; }
+    .stack-card p { color: #536276; font-size: 7.5pt; line-height: 1.35; margin: 0; }
+    .quote { color: #007F82; font-size: 18pt; font-weight: 800; line-height: .8; }
+    .architecture { margin: 8mm auto 0; max-width: 257mm; }
+    .arch-top { display: flex; justify-content: center; gap: 6px; align-items: center; }
+    .arch-box { text-align: center; min-width: 40mm; padding: 9px 10px; border: 1px solid #D9E3E6; border-radius: 8px; background: white; font-size: 8.6pt; font-weight: 800; }
+    .arch-box.primary { background: #007F82; border-color: #007F82; color: white; }
+    .arch-box.dark { background: #172033; border-color: #172033; color: white; }
+    .arch-box.coral { background: #EE6C4D; border-color: #EE6C4D; color: white; }
+    .arch-arrow { text-align: center; color: #EE6C4D; font-size: 17pt; font-weight: 800; margin: 4px; }
+    .service-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .service-grid .arch-box { min-width: 0; padding: 9px 4px; font-size: 7.5pt; }
+    .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; max-width: 180mm; margin: 0 auto; }
+    .connector-row { height: 12mm; position: relative; }
+    .connector-row:before { content: ""; position: absolute; top: 0; left: 50%; height: 100%; border-left: 2px solid #EE6C4D; }
+    .connector-row:after { content: ""; position: absolute; bottom: -1px; left: calc(50% - 4px); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #EE6C4D; }
+    .diagram-legend { display: flex; justify-content: center; gap: 16px; margin-top: 9mm; color: #536276; font-size: 8pt; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; background: #007F82; }
+    .legend-dot.coral { background: #EE6C4D; }
+    .roadmap { display: grid; grid-template-columns: 30mm 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid #D9E3E6; }
+    .roadmap strong { color: #007F82; font-size: 8.5pt; text-transform: uppercase; letter-spacing: .6px; }
+    .roadmap div { color: #536276; font-size: 8.8pt; line-height: 1.45; }
+  </style>
+</head>
+<body class="portrait">
+<section class="page">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">OpenAI Build Week Hackathon Submission</div>
+        <h1>InRideMart<br/>AI-Powered In-Ride Shopping Concierge</h1>
+        <div class="accent-line"></div>
+        <p class="lede">A full-stack commerce experience that helps passengers discover useful, cab-available convenience products during a ride, with an AI assistant that turns travel context into explainable suggestions.</p>
+        <div class="callout">Built as an existing Java Spring Boot microservice monorepo with a Next.js frontend. The project reuses service ownership across authentication, catalog, cart, checkout, payment, and AI orchestration.</div>
+        <h2>Executive Summary</h2>
+        <p>InRideMart addresses the small but time-sensitive needs that surface in transit: a dead phone, a long airport journey, hunger, rain, or a forgotten essential. It keeps discovery and purchase close to the passenger while preserving the Catalog service as the product source of truth.</p>
+        <div class="grid-3">
+          <div class="card"><div class="icon">1</div><h3>Discover</h3><p>Browse the active catalog and assigned demo cab inventory.</p></div>
+          <div class="card"><div class="icon coral">2</div><h3>Decide</h3><p>Ask the assistant for relevant products and optional bundles.</p></div>
+          <div class="card"><div class="icon gold">3</div><h3>Complete</h3><p>Use cart, checkout, mock payment, and order tracking.</p></div>
+        </div>
+        <h3 style="margin-top:12px">Contents</h3>
+        <div class="toc"><div><span>Executive summary</span><span>1</span></div><div><span>Problem, solution, features</span><span>2</span></div><div><span>Architecture and operations</span><span>3</span></div><div><span>AI capabilities and roadmap</span><span>4</span></div></div>
+      </div>
+      <aside class="hero-mark">
+        <p class="brand">InRideMart</p>
+        <p class="brand-sub">A calm, practical shopping assistant for the time between pickup and drop-off.</p>
+        <div class="ride-chip"><span class="dot"></span> Build Week MVP</div>
+      </aside>
+    </div>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 1 of 4</span></footer>
+  </section>
+<section class="page">
+    <div class="eyebrow">Overview</div><h2>Problem, Solution, and Features</h2><div class="accent-line"></div>
+      <div class="grid-2">
+        <div class="card highlight"><h3>Problem Statement</h3><p>Passengers often realize they need a charger, drink, snack, travel comfort item, or rain essential only after a ride has started. Traditional quick-commerce services are not optimized for the short time window, current journey context, or inventory that is immediately accessible in the vehicle.</p></div>
+        <div class="card coral"><h3>Solution Overview</h3><p>InRideMart brings a catalog-led shopping flow into the ride. A conversational AI layer understands intent and context, then recommends only products returned by the existing catalog and available in the assigned demo cab inventory.</p></div>
+      </div>
+      <h2 style="margin-top:15px">Implemented MVP Capabilities</h2>
+      <div class="grid-3">
+        <div class="card"><div class="icon">AI</div><h3>Conversational Shopping</h3><p>Natural requests, clarifying questions, budget-aware suggestions, and catalog-grounded explanations.</p></div>
+        <div class="card"><div class="icon coral">CB</div><h3>Travel Bundles</h3><p>Contextual bundle suggestions such as airport, charging, rainy-day, and road-trip essentials.</p></div>
+        <div class="card"><div class="icon gold">CI</div><h3>Cab Inventory View</h3><p>Frontend filters the existing catalog to the assigned demo cab inventory. It is not a live driver inventory integration.</p></div>
+        <div class="card"><div class="icon">CT</div><h3>Cart and Checkout</h3><p>Authenticated cart ownership, product validation, checkout, and order creation through dedicated services.</p></div>
+        <div class="card"><div class="icon coral">PM</div><h3>Mock Payment</h3><p>UPI, credit card, debit card, and wallet choices with a production-like successful-payment experience.</p></div>
+        <div class="card"><div class="icon gold">TR</div><h3>Order Tracking</h3><p>Order progression from placed to confirmed, handed over, and completed.</p></div>
+      </div>
+      <div class="callout warn"><strong>Scope note:</strong> All product availability, prices, and names come from the Catalog service. AI does not invent products, prices, stock, or payment outcomes.</div>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 2 of 4</span></footer>
+  </section>
+<section class="page">
+    <div class="eyebrow">Architecture and Operations</div><h2>How the Platform Runs</h2><div class="accent-line"></div>
+      <p>Next.js provides the mobile-first web experience and a same-origin API proxy. The backend uses independently owned Spring Boot services; PostgreSQL, Redis, and Kafka are started through Docker Compose for local development.</p>
+      <div class="flow"><span class="node primary">Next.js Frontend :3000</span><span class="arrow">-></span><span class="node coral">API Proxy</span><span class="arrow">-></span><span class="node">Spring Boot Services</span><span class="arrow">-></span><span class="node">PostgreSQL / Redis / Kafka</span></div>
+      <div class="grid-2">
+        <div class="card"><h3>Service Ports</h3><table><tr><th>Service</th><th>Port</th></tr><tr><td>Auth</td><td>8081</td></tr><tr><td>Customer</td><td>8082</td></tr><tr><td>Catalog</td><td>8083</td></tr><tr><td>Cart</td><td>8084</td></tr><tr><td>Order</td><td>8085</td></tr><tr><td>AI</td><td>8086</td></tr><tr><td>Payment</td><td>8087</td></tr></table></div>
+        <div class="card"><h3>API Surface</h3><p><code>/api/v1/auth</code> register, login, current user</p><p><code>/api/v1/customers</code> customer profiles</p><p><code>/api/v1/catalog/products</code> browse and search</p><p><code>/api/v1/carts/me</code> cart, items, checkout</p><p><code>/api/v1/orders</code> orders and tracking</p><p><code>/api/v1/payments</code> mock payment and status</p><p><code>/api/v1/ai</code> chat and translation</p></div>
+      </div>
+      <h2 style="margin-top:12px">Local Setup</h2>
+      <pre>git clone &lt;REPLACE-WITH-REPOSITORY-URL&gt;
+cd InRideMart
+$env:OPENAI_API_KEY = "&lt;your-key&gt;"   # optional; fallback remains available
+.\start-inridemart.ps1</pre>
+      <p class="tiny">The start script sets local development variables, starts Docker Compose, opens service processes, and runs the frontend. PostgreSQL is exposed on host port 5433; Redis uses 6379; Kafka uses 9092.</p>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 3 of 4</span></footer>
+  </section>
+<section class="page">
+    <div class="eyebrow">AI and Roadmap</div><h2>AI Capabilities and Next Steps</h2><div class="accent-line"></div>
+      <div class="grid-2">
+        <div class="card highlight"><h3>How GPT-5.6 Is Used</h3><p>The dedicated AI service uses the OpenAI Responses API for conversational reasoning, intent detection, follow-up questions, and multilingual translation. The model is configured through environment variables; no secret is embedded in source.</p><p>Known shopping intents are matched against catalog data, with context including budget, destination, weather, journey duration, purpose, and available cab inventory. GPT is never asked to create product facts outside that catalog.</p></div>
+        <div class="card"><h3>Resilient Behavior</h3><p>When an OpenAI key is unavailable or a live call fails, the AI service uses deterministic, catalog-grounded handling and makes that fallback explicit. Empty or ambiguous requests prompt for clarification rather than producing a generic product list.</p><p>The multilingual assistant uses GPT when configured and local phrase support only when live translation is unavailable.</p></div>
+      </div>
+      <h2 style="margin-top:14px">Future Roadmap</h2>
+      <div class="roadmap"><strong>Inventory</strong><div>Live driver and cab inventory synchronization, replenishment signals, and availability updates.</div></div>
+      <div class="roadmap"><strong>Commerce</strong><div>Real payment-gateway integration, refunds, receipt delivery, loyalty rewards, and richer fulfillment states.</div></div>
+      <div class="roadmap"><strong>Mobility</strong><div>Ride booking integration, destination signals, driver workflows, and a native mobile client using the same backend APIs.</div></div>
+      <div class="roadmap"><strong>AI</strong><div>Voice interaction, stronger preference memory with consent, and predictive recommendations based on opt-in trip history.</div></div>
+      <h2 style="margin-top:15px">OpenAPI Documentation</h2>
+      <table><tr><th>Service</th><th>Swagger UI</th></tr><tr><td>Auth</td><td><code>http://localhost:8081/swagger-ui.html</code></td></tr><tr><td>Customer</td><td><code>http://localhost:8082/swagger-ui.html</code></td></tr><tr><td>Catalog</td><td><code>http://localhost:8083/swagger-ui.html</code></td></tr><tr><td>Order</td><td><code>http://localhost:8085/swagger-ui.html</code></td></tr><tr><td>AI</td><td><code>http://localhost:8086/swagger-ui.html</code></td></tr></table>
+      <p class="tiny">Cart and Payment APIs are available through their service endpoints but do not currently expose a Springdoc Swagger UI in the repository configuration.</p>
+    <footer class="footer"><span>InRideMart | OpenAI Build Week 2026</span><span>Page 4 of 4</span></footer>
+  </section>
+</body>
+</html>
